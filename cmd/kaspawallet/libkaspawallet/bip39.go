@@ -6,6 +6,7 @@ import (
 	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet/bip32"
 	"github.com/k1pool/kaspad/domain/dagconfig"
 	"github.com/pkg/errors"
+	"github.com/tyler-smith/go-bip39"
 )
 
 // CreateMnemonic creates a new bip-39 compatible mnemonic

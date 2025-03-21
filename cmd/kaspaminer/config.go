@@ -9,6 +9,7 @@ import (
 
 	"github.com/k1pool/kaspad/infrastructure/config"
 
+	"github.com/jessevdk/go-flags"
 	"github.com/k1pool/kaspad/util"
 	"github.com/pkg/errors"
 

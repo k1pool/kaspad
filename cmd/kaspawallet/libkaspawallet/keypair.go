@@ -8,6 +8,7 @@ import (
 	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet/bip32"
 	"github.com/k1pool/kaspad/domain/dagconfig"
 	"github.com/k1pool/kaspad/util"
+	"github.com/kaspanet/go-secp256k1"
 	"github.com/pkg/errors"
 )
 
