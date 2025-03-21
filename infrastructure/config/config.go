@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"github.com/btcsuite/go-socks/socks"
+	"github.com/jessevdk/go-flags"
 	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
 	"github.com/k1pool/kaspad/domain/dagconfig"
 	"github.com/k1pool/kaspad/infrastructure/logger"

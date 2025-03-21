@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/jessevdk/go-flags"
 	"github.com/k1pool/kaspad/domain/dagconfig"
 	"github.com/k1pool/kaspad/util/difficulty"
 	"github.com/pkg/errors"

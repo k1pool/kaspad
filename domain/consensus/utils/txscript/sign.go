@@ -11,6 +11,7 @@ import (
 
 	"github.com/k1pool/kaspad/domain/dagconfig"
 	"github.com/k1pool/kaspad/util"
+	"github.com/kaspanet/go-secp256k1"
 )
 
 // RawTxInSignature returns the serialized Schnorr signature for the input idx of
