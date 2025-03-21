@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/jessevdk/go-flags"
 	"github.com/k1pool/kaspad/infrastructure/config"
 )
 
