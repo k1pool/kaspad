@@ -1225,6 +1225,87 @@ func (x *SendRequest) GetFeePolicy() *FeePolicy {
 	return nil
 }
 
+func (x *SendMultiRequest) Reset() {
+	*x = SendMultiRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_kaspawalletd_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendMultiRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendMultiRequest) ProtoMessage() {}
+
+func (x *SendMultiRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_kaspawalletd_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendRequest.ProtoReflect.Descriptor instead.
+func (*SendMultiRequest) Descriptor() ([]byte, []int) {
+	return file_kaspawalletd_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *SendMultiRequest) GetToAddress() string {
+	if x != nil {
+		return x.ToAddress[]
+	}
+	return ""
+}
+
+func (x *SendMultiRequest) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount[]
+	}
+	return 0
+}
+
+func (x *SendMultiRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *SendMultiRequest) GetFrom() []string {
+	if x != nil {
+		return x.From
+	}
+	return nil
+}
+
+func (x *SendMultiRequest) GetUseExistingChangeAddress() bool {
+	if x != nil {
+		return x.UseExistingChangeAddress
+	}
+	return false
+}
+
+func (x *SendMultiRequest) GetIsSendAll() bool {
+	if x != nil {
+		return x.IsSendAll
+	}
+	return false
+}
+
+func (x *SendMultiRequest) GetFeePolicy() *FeePolicy {
+	if x != nil {
+		return x.FeePolicy
+	}
+	return nil
+}
+
 type SendResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
