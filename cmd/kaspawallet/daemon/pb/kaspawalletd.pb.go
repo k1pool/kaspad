@@ -1114,6 +1114,23 @@ type SendRequest struct {
 	FeePolicy                *FeePolicy `protobuf:"bytes,7,opt,name=feePolicy,proto3" json:"feePolicy,omitempty"`
 }
 
+
+// Since SendRequest contains a password - this command should only be used on a
+// trusted or secure connection
+type SendMultiRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ToAddress                []string     `protobuf:"bytes,1,opt,name=toAddress,proto3" json:"toAddress,omitempty"`
+	Amount                   []uint64     `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	Password                 string     `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	From                     []string   `protobuf:"bytes,4,rep,name=from,proto3" json:"from,omitempty"`
+	UseExistingChangeAddress bool       `protobuf:"varint,5,opt,name=useExistingChangeAddress,proto3" json:"useExistingChangeAddress,omitempty"`
+	IsSendAll                bool       `protobuf:"varint,6,opt,name=isSendAll,proto3" json:"isSendAll,omitempty"`
+	FeePolicy                *FeePolicy `protobuf:"bytes,7,opt,name=feePolicy,proto3" json:"feePolicy,omitempty"`
+}
+
 func (x *SendRequest) Reset() {
 	*x = SendRequest{}
 	if protoimpl.UnsafeEnabled {
