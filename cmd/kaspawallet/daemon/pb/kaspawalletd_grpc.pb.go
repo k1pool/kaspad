@@ -132,7 +132,7 @@ func (c *kaspawalletdClient) Send(ctx context.Context, in *SendRequest, opts ...
 }
 
 func (c *kaspawalletdClient) SendMulti(ctx context.Context, in *SendMultiRequest, opts ...grpc.CallOption) (*SendResponse, error) {
-	out := new(SendResponse)
+	out := new(SendMultiRequest)
 	err := c.cc.Invoke(ctx, "/kaspawalletd.kaspawalletd/SendMulti", in, out, opts...)
 	if err != nil {
 		return nil, err
