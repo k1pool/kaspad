@@ -20,6 +20,7 @@ import (
 	"github.com/k1pool/kaspad/domain/miningmanager/mempool"
 	"github.com/k1pool/kaspad/util"
 	"github.com/k1pool/kaspad/util/txmass"
+	"github.com/kaspanet/go-secp256k1"
 	"github.com/pkg/errors"
 )
 
