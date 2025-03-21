@@ -7,11 +7,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/libkaspawallet"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/utils"
-	"github.com/kaspanet/kaspad/domain/dagconfig"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/utils"
+	"github.com/k1pool/kaspad/domain/dagconfig"
 	"github.com/pkg/errors"
-	"github.com/tyler-smith/go-bip39"
 )
 
 // CreateMnemonics generates `numKeys` number of mnemonics.

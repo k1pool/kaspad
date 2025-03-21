@@ -1,10 +1,10 @@
 package consensusstatemanager
 
 import (
-	"github.com/kaspanet/kaspad/domain/consensus/model"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
-	"github.com/kaspanet/kaspad/infrastructure/logger"
-	"github.com/kaspanet/kaspad/util/staging"
+	"github.com/k1pool/kaspad/domain/consensus/model"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/infrastructure/logger"
+	"github.com/k1pool/kaspad/util/staging"
 )
 
 func (csm *consensusStateManager) ReverseUTXODiffs(tipHash *externalapi.DomainHash,

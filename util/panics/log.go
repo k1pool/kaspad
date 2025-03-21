@@ -1,7 +1,7 @@
 package panics
 
 import (
-	"github.com/kaspanet/kaspad/infrastructure/logger"
+	"github.com/k1pool/kaspad/infrastructure/logger"
 )
 
 var utilLog = logger.RegisterSubSystem("UTIL")

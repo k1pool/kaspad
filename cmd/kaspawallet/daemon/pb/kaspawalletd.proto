@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/kaspanet/kaspad/cmd/kaspawallet/daemon/pb";
+option go_package = "github.com/k1pool/kaspad/cmd/kaspawallet/daemon/pb";
 package kaspawalletd;
 
 service kaspawalletd {
@@ -8,6 +8,8 @@ service kaspawalletd {
   rpc GetExternalSpendableUTXOs(GetExternalSpendableUTXOsRequest)
       returns (GetExternalSpendableUTXOsResponse) {}
   rpc CreateUnsignedTransactions(CreateUnsignedTransactionsRequest)
+      returns (CreateUnsignedTransactionsResponse) {}
+  rpc CreateUnsignedMultiTransactions(CreateUnsignedMultiTransactionsRequest)
       returns (CreateUnsignedTransactionsResponse) {}
   rpc ShowAddresses(ShowAddressesRequest) returns (ShowAddressesResponse) {}
   rpc NewAddress(NewAddressRequest) returns (NewAddressResponse) {}
@@ -18,6 +20,7 @@ service kaspawalletd {
   // Since SendRequest contains a password - this command should only be used on
   // a trusted or secure connection
   rpc Send(SendRequest) returns (SendResponse) {}
+  rpc SendMulti(SendMultiRequest) returns (SendResponse) {}
   // Since SignRequest contains a password - this command should only be used on
   // a trusted or secure connection
   rpc Sign(SignRequest) returns (SignResponse) {}
@@ -50,6 +53,15 @@ message FeePolicy {
 message CreateUnsignedTransactionsRequest {
   string address = 1;
   uint64 amount = 2;
+  repeated string from = 3;
+  bool useExistingChangeAddress = 4;
+  bool isSendAll = 5;
+  FeePolicy feePolicy = 6;
+}
+
+message CreateUnsignedMultiTransactionsRequest {
+  repeated string address = 1;
+  repeated uint64 amount = 2;
   repeated string from = 3;
   bool useExistingChangeAddress = 4;
   bool isSendAll = 5;
@@ -112,6 +124,18 @@ message GetExternalSpendableUTXOsResponse {
 message SendRequest {
   string toAddress = 1;
   uint64 amount = 2;
+  string password = 3;
+  repeated string from = 4;
+  bool useExistingChangeAddress = 5;
+  bool isSendAll = 6;
+  FeePolicy feePolicy = 7;
+}
+
+// Since SendRequest contains a password - this command should only be used on a
+// trusted or secure connection
+message SendMultiRequest {
+  repeated string toAddress = 1;
+  repeated uint64 amount = 2;
   string password = 3;
   repeated string from = 4;
   bool useExistingChangeAddress = 5;

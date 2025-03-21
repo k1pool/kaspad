@@ -1,21 +1,21 @@
 package transactionrelay_test
 
 import (
-	"github.com/kaspanet/kaspad/app/protocol/flowcontext"
-	"github.com/kaspanet/kaspad/app/protocol/flows/v5/transactionrelay"
+	"github.com/k1pool/kaspad/app/protocol/flowcontext"
+	"github.com/k1pool/kaspad/app/protocol/flows/v5/transactionrelay"
 	"testing"
 
-	"github.com/kaspanet/kaspad/app/appmessage"
-	"github.com/kaspanet/kaspad/domain"
-	"github.com/kaspanet/kaspad/domain/consensus"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/testutils"
-	"github.com/kaspanet/kaspad/domain/miningmanager/mempool"
-	"github.com/kaspanet/kaspad/infrastructure/config"
-	"github.com/kaspanet/kaspad/infrastructure/logger"
-	"github.com/kaspanet/kaspad/infrastructure/network/netadapter"
-	"github.com/kaspanet/kaspad/infrastructure/network/netadapter/router"
-	"github.com/kaspanet/kaspad/util/panics"
+	"github.com/k1pool/kaspad/app/appmessage"
+	"github.com/k1pool/kaspad/domain"
+	"github.com/k1pool/kaspad/domain/consensus"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/domain/consensus/utils/testutils"
+	"github.com/k1pool/kaspad/domain/miningmanager/mempool"
+	"github.com/k1pool/kaspad/infrastructure/config"
+	"github.com/k1pool/kaspad/infrastructure/logger"
+	"github.com/k1pool/kaspad/infrastructure/network/netadapter"
+	"github.com/k1pool/kaspad/infrastructure/network/netadapter/router"
+	"github.com/k1pool/kaspad/util/panics"
 	"github.com/pkg/errors"
 )
 

@@ -23,7 +23,7 @@ COPY --from=kaspad /app/ /app/
 COPY --from=kaspaminer /app/ /app/
 ENV PATH="/app:${PATH}"
 
-WORKDIR /go/src/github.com/kaspanet/kaspad/stability-tests
+WORKDIR /go/src/github.com/k1pool/kaspad/stability-tests
 
 RUN go install ./...
 

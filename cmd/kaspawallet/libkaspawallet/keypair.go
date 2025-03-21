@@ -5,10 +5,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/kaspanet/go-secp256k1"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/libkaspawallet/bip32"
-	"github.com/kaspanet/kaspad/domain/dagconfig"
-	"github.com/kaspanet/kaspad/util"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet/bip32"
+	"github.com/k1pool/kaspad/domain/dagconfig"
+	"github.com/k1pool/kaspad/util"
 	"github.com/pkg/errors"
 )
 

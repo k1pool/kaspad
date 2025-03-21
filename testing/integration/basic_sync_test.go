@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kaspanet/kaspad/domain/consensus/utils/consensushashing"
+	"github.com/k1pool/kaspad/domain/consensus/utils/consensushashing"
 
-	"github.com/kaspanet/kaspad/app/appmessage"
+	"github.com/k1pool/kaspad/app/appmessage"
 )
 
 func TestIntegrationBasicSync(t *testing.T) {

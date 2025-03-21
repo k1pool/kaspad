@@ -1,7 +1,7 @@
 package dagconfig
 
 import (
-	"github.com/kaspanet/kaspad/domain/consensus/utils/constants"
+	"github.com/k1pool/kaspad/domain/consensus/utils/constants"
 	"time"
 )
 

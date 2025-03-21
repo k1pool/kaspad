@@ -1,8 +1,8 @@
 package staging
 
 import (
-	"github.com/kaspanet/kaspad/domain/consensus/model"
-	"github.com/kaspanet/kaspad/infrastructure/logger"
+	"github.com/k1pool/kaspad/domain/consensus/model"
+	"github.com/k1pool/kaspad/infrastructure/logger"
 	"sync/atomic"
 )
 

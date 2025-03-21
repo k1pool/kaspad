@@ -1,14 +1,14 @@
 package rpchandlers
 
 import (
-	"github.com/kaspanet/kaspad/app/appmessage"
-	"github.com/kaspanet/kaspad/app/rpc/rpccontext"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/transactionhelper"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/txscript"
-	"github.com/kaspanet/kaspad/infrastructure/network/netadapter/router"
-	"github.com/kaspanet/kaspad/util"
-	"github.com/kaspanet/kaspad/version"
+	"github.com/k1pool/kaspad/app/appmessage"
+	"github.com/k1pool/kaspad/app/rpc/rpccontext"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/domain/consensus/utils/transactionhelper"
+	"github.com/k1pool/kaspad/domain/consensus/utils/txscript"
+	"github.com/k1pool/kaspad/infrastructure/network/netadapter/router"
+	"github.com/k1pool/kaspad/util"
+	"github.com/k1pool/kaspad/version"
 )
 
 // HandleGetBlockTemplate handles the respectively named RPC command

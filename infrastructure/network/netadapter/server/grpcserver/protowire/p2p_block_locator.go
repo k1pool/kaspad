@@ -1,8 +1,8 @@
 package protowire
 
 import (
-	"github.com/kaspanet/kaspad/app/appmessage"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/app/appmessage"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
 	"github.com/pkg/errors"
 )
 

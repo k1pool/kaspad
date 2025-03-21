@@ -17,13 +17,12 @@ import (
 	"time"
 
 	"github.com/btcsuite/go-socks/socks"
-	"github.com/jessevdk/go-flags"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
-	"github.com/kaspanet/kaspad/domain/dagconfig"
-	"github.com/kaspanet/kaspad/infrastructure/logger"
-	"github.com/kaspanet/kaspad/util"
-	"github.com/kaspanet/kaspad/util/network"
-	"github.com/kaspanet/kaspad/version"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/domain/dagconfig"
+	"github.com/k1pool/kaspad/infrastructure/logger"
+	"github.com/k1pool/kaspad/util"
+	"github.com/k1pool/kaspad/util/network"
+	"github.com/k1pool/kaspad/version"
 	"github.com/pkg/errors"
 )
 

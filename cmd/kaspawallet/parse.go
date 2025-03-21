@@ -6,13 +6,13 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/daemon/server"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/keys"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/libkaspawallet/serialization"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/consensushashing"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/constants"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/txscript"
-	"github.com/kaspanet/kaspad/util/txmass"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/daemon/server"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/keys"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet/serialization"
+	"github.com/k1pool/kaspad/domain/consensus/utils/consensushashing"
+	"github.com/k1pool/kaspad/domain/consensus/utils/constants"
+	"github.com/k1pool/kaspad/domain/consensus/utils/txscript"
+	"github.com/k1pool/kaspad/util/txmass"
 	"github.com/pkg/errors"
 )
 

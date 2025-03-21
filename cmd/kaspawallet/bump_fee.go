@@ -6,10 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/daemon/client"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/daemon/pb"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/keys"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/libkaspawallet"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/daemon/client"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/daemon/pb"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/keys"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet"
 	"github.com/pkg/errors"
 )
 

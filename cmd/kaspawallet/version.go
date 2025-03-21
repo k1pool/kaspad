@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/kaspanet/kaspad/version"
+	"github.com/k1pool/kaspad/version"
 	"os"
 	"path/filepath"
 	"strings"

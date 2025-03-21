@@ -1,4 +1,4 @@
-module github.com/kaspanet/kaspad
+module github.com/k1pool/kaspad
 
 go 1.23
 

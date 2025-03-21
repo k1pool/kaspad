@@ -2,19 +2,19 @@ package main
 
 import (
 	"fmt"
-	"github.com/kaspanet/kaspad/domain/consensus"
+	"github.com/k1pool/kaspad/domain/consensus"
 	"os/exec"
 	"strings"
 	"sync/atomic"
 	"syscall"
 	"time"
 
-	"github.com/kaspanet/kaspad/app/appmessage"
-	"github.com/kaspanet/kaspad/stability-tests/common"
-	"github.com/kaspanet/kaspad/stability-tests/common/mine"
-	"github.com/kaspanet/kaspad/stability-tests/common/rpc"
-	"github.com/kaspanet/kaspad/util"
-	"github.com/kaspanet/kaspad/util/panics"
+	"github.com/k1pool/kaspad/app/appmessage"
+	"github.com/k1pool/kaspad/stability-tests/common"
+	"github.com/k1pool/kaspad/stability-tests/common/mine"
+	"github.com/k1pool/kaspad/stability-tests/common/rpc"
+	"github.com/k1pool/kaspad/util"
+	"github.com/k1pool/kaspad/util/panics"
 	"github.com/pkg/errors"
 )
 

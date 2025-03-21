@@ -3,9 +3,8 @@ package main
 import (
 	"path/filepath"
 
-	"github.com/jessevdk/go-flags"
-	"github.com/kaspanet/kaspad/infrastructure/config"
-	"github.com/kaspanet/kaspad/stability-tests/common"
+	"github.com/k1pool/kaspad/infrastructure/config"
+	"github.com/k1pool/kaspad/stability-tests/common"
 )
 
 const (

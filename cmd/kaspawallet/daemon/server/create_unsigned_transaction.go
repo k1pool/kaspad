@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/daemon/pb"
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/libkaspawallet"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/constants"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/utxo"
-	"github.com/kaspanet/kaspad/util"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/daemon/pb"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/domain/consensus/utils/constants"
+	"github.com/k1pool/kaspad/domain/consensus/utils/utxo"
+	"github.com/k1pool/kaspad/util"
 	"github.com/pkg/errors"
 )
 
@@ -32,6 +32,21 @@ func (s *server) CreateUnsignedTransactions(_ context.Context, request *pb.Creat
 	defer s.lock.Unlock()
 
 	unsignedTransactions, err := s.createUnsignedTransactions(request.Address, request.Amount, request.IsSendAll,
+		request.From, request.UseExistingChangeAddress, request.FeePolicy)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.CreateUnsignedTransactionsResponse{UnsignedTransactions: unsignedTransactions}, nil
+}
+
+func (s *server) CreateUnsignedMultiTransactions(_ context.Context, request *pb.CreateUnsignedMultiTransactionsRequest) (
+	*pb.CreateUnsignedTransactionsResponse, error,
+) {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+
+	unsignedTransactions, err := s.createUnsignedMultiTransactions(request.Address, request.Amount, request.IsSendAll,
 		request.From, request.UseExistingChangeAddress, request.FeePolicy)
 	if err != nil {
 		return nil, err
@@ -127,6 +142,84 @@ func (s *server) createUnsignedTransactions(address string, amount uint64, isSen
 		Address: toAddress,
 		Amount:  spendValue,
 	}}
+	if changeSompi > 0 {
+		payments = append(payments, &libkaspawallet.Payment{
+			Address: changeAddress,
+			Amount:  changeSompi,
+		})
+	}
+	unsignedTransaction, err := libkaspawallet.CreateUnsignedTransaction(s.keysFile.ExtendedPublicKeys,
+		s.keysFile.MinimumSignatures,
+		payments, selectedUTXOs)
+	if err != nil {
+		return nil, err
+	}
+
+	unsignedTransactions, err := s.maybeAutoCompoundTransaction(unsignedTransaction, toAddress, changeAddress, changeWalletAddress, feeRate, maxFee)
+	if err != nil {
+		return nil, err
+	}
+	return unsignedTransactions, nil
+}
+
+func (s *server) createUnsignedMultiTransactions(addresses []string, amounts []uint64, isSendAll bool, fromAddressesString []string, useExistingChangeAddress bool, requestFeePolicy *pb.FeePolicy) ([][]byte, error) {
+	if !s.isSynced() {
+		return nil, errors.Errorf("wallet daemon is not synced yet, %s", s.formatSyncStateReport())
+	}
+
+	feeRate, maxFee, err := s.calculateFeeLimits(requestFeePolicy)
+	if err != nil {
+		return nil, err
+	}
+
+	// make sure 1st address string is correct before proceeding to a
+	// potentially long UTXO refreshment operation
+	toAddress, err := util.DecodeAddress(addresses[0], s.params.Prefix)
+	if err != nil {
+		return nil, err
+	}
+
+	var totalAmount uint64
+	totalAmount = 0
+	for _, a := range amounts {
+		totalAmount += a
+	}
+
+	var fromAddresses []*walletAddress
+	for _, from := range fromAddressesString {
+		fromAddress, exists := s.addressSet[from]
+		if !exists {
+			return nil, fmt.Errorf("specified from address %s does not exists", from)
+		}
+		fromAddresses = append(fromAddresses, fromAddress)
+	}
+
+	changeAddress, changeWalletAddress, err := s.changeAddress(useExistingChangeAddress, fromAddresses)
+	if err != nil {
+		return nil, err
+	}
+
+	selectedUTXOs, _, changeSompi, err := s.selectUTXOs(totalAmount, isSendAll, feeRate, maxFee, fromAddresses)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(selectedUTXOs) == 0 {
+		return nil, errors.Errorf("couldn't find funds to spend")
+	}
+
+	var payments []*libkaspawallet.Payment
+	for i, to := range addresses {
+		toAddr, err := util.DecodeAddress(to, s.params.Prefix)
+		if err != nil {
+			return nil, err
+		}
+		payments = append(payments, &libkaspawallet.Payment{
+			Address: toAddr,
+			Amount:  amounts[i],
+		})
+	}
+
 	if changeSompi > 0 {
 		payments = append(payments, &libkaspawallet.Payment{
 			Address: changeAddress,

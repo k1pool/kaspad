@@ -3,13 +3,13 @@ package pruningstore
 import (
 	"encoding/binary"
 	"github.com/golang/protobuf/proto"
-	"github.com/kaspanet/kaspad/domain/consensus/database"
-	"github.com/kaspanet/kaspad/domain/consensus/database/binaryserialization"
-	"github.com/kaspanet/kaspad/domain/consensus/database/serialization"
-	"github.com/kaspanet/kaspad/domain/consensus/model"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
-	"github.com/kaspanet/kaspad/domain/consensus/utils/lrucacheuint64tohash"
-	"github.com/kaspanet/kaspad/util/staging"
+	"github.com/k1pool/kaspad/domain/consensus/database"
+	"github.com/k1pool/kaspad/domain/consensus/database/binaryserialization"
+	"github.com/k1pool/kaspad/domain/consensus/database/serialization"
+	"github.com/k1pool/kaspad/domain/consensus/model"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/domain/consensus/utils/lrucacheuint64tohash"
+	"github.com/k1pool/kaspad/util/staging"
 	"github.com/pkg/errors"
 )
 

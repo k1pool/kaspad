@@ -34,6 +34,7 @@ type KaspawalletdClient interface {
 	// Since SendRequest contains a password - this command should only be used on
 	// a trusted or secure connection
 	Send(ctx context.Context, in *SendRequest, opts ...grpc.CallOption) (*SendResponse, error)
+	SendMulti(ctx context.Context, in *SendMultiRequest, opts ...grpc.CallOption) (*SendResponse, error)
 	// Since SignRequest contains a password - this command should only be used on
 	// a trusted or secure connection
 	Sign(ctx context.Context, in *SignRequest, opts ...grpc.CallOption) (*SignResponse, error)
@@ -130,6 +131,15 @@ func (c *kaspawalletdClient) Send(ctx context.Context, in *SendRequest, opts ...
 	return out, nil
 }
 
+func (c *kaspawalletdClient) SendMulti(ctx context.Context, in *SendMultiRequest, opts ...grpc.CallOption) (*SendResponse, error) {
+	out := new(SendResponse)
+	err := c.cc.Invoke(ctx, "/kaspawalletd.kaspawalletd/SendMulti", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *kaspawalletdClient) Sign(ctx context.Context, in *SignRequest, opts ...grpc.CallOption) (*SignResponse, error) {
 	out := new(SignResponse)
 	err := c.cc.Invoke(ctx, "/kaspawalletd.kaspawalletd/Sign", in, out, opts...)
@@ -173,6 +183,7 @@ type KaspawalletdServer interface {
 	// Since SendRequest contains a password - this command should only be used on
 	// a trusted or secure connection
 	Send(context.Context, *SendRequest) (*SendResponse, error)
+	SendMulti(context.Context, *SendMultiRequest) (*SendResponse, error)
 	// Since SignRequest contains a password - this command should only be used on
 	// a trusted or secure connection
 	Sign(context.Context, *SignRequest) (*SignResponse, error)
@@ -211,6 +222,9 @@ func (UnimplementedKaspawalletdServer) BroadcastReplacement(context.Context, *Br
 }
 func (UnimplementedKaspawalletdServer) Send(context.Context, *SendRequest) (*SendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Send not implemented")
+}
+func (UnimplementedKaspawalletdServer) SendMulti(context.Context, *SendMultiRequest) (*SendResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMulti not implemented")
 }
 func (UnimplementedKaspawalletdServer) Sign(context.Context, *SignRequest) (*SignResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Sign not implemented")
@@ -389,6 +403,25 @@ func _Kaspawalletd_Send_Handler(srv interface{}, ctx context.Context, dec func(i
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: "/kaspawalletd.kaspawalletd/Send",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KaspawalletdServer).Send(ctx, req.(*SendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+
+func _Kaspawalletd_SendMulti_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendMultiRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KaspawalletdServer).Send(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kaspawalletd.kaspawalletd/SendMulti",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(KaspawalletdServer).Send(ctx, req.(*SendRequest))

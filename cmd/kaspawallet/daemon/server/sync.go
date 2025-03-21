@@ -5,10 +5,10 @@ import (
 	"sort"
 	"time"
 
-	"github.com/kaspanet/kaspad/cmd/kaspawallet/libkaspawallet"
-	"github.com/kaspanet/kaspad/domain/consensus/model/externalapi"
+	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet"
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
 
-	"github.com/kaspanet/kaspad/app/appmessage"
+	"github.com/k1pool/kaspad/app/appmessage"
 	"github.com/pkg/errors"
 )
 
