@@ -5,10 +5,10 @@
 package dagconfig
 
 import (
+	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
 	"github.com/k1pool/kaspad/domain/consensus/utils/blockheader"
 	"github.com/k1pool/kaspad/domain/consensus/utils/subnetworks"
 	"github.com/k1pool/kaspad/domain/consensus/utils/transactionhelper"
-	"github.com/kaspanet/go-muhash"
 	"math/big"
 )
 

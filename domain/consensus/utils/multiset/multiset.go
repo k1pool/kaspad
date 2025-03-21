@@ -3,6 +3,7 @@ package multiset
 import (
 	"github.com/k1pool/kaspad/domain/consensus/model"
 	"github.com/k1pool/kaspad/domain/consensus/model/externalapi"
+	"github.com/kaspanet/go-muhash"
 	"github.com/pkg/errors"
 )
 

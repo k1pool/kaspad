@@ -424,7 +424,7 @@ func _Kaspawalletd_SendMulti_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/kaspawalletd.kaspawalletd/SendMulti",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(KaspawalletdServer).SendMulti(ctx, req.(*SendRequest))
+		return srv.(KaspawalletdServer).SendMulti(ctx, req.(*SendMultiRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
