@@ -1257,18 +1257,21 @@ func (*SendMultiRequest) Descriptor() ([]byte, []int) {
 	return file_kaspawalletd_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *SendMultiRequest) GetToAddress() string {
+func (x *SendMultiRequest) GetToAddress() []string {
 	if x != nil {
-		return x.ToAddress[]
+		return x.ToAddress
 	}
-	return ""
+	var reply []string
+	reply = append(reply, "")
+	return reply
 }
 
-func (x *SendMultiRequest) GetAmount() uint64 {
+func (x *SendMultiRequest) GetAmount() []uint64 {
 	if x != nil {
-		return x.Amount[]
+		return x.Amount
 	}
-	return 0
+	reply := []uint64{0}
+	return reply
 }
 
 func (x *SendMultiRequest) GetPassword() string {
