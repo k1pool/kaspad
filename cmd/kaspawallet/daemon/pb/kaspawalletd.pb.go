@@ -291,6 +291,19 @@ type CreateUnsignedTransactionsRequest struct {
 	FeePolicy                *FeePolicy `protobuf:"bytes,6,opt,name=feePolicy,proto3" json:"feePolicy,omitempty"`
 }
 
+type CreateUnsignedMultiTransactionsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Address                  []string     `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	Amount                   []uint64     `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	From                     []string   `protobuf:"bytes,3,rep,name=from,proto3" json:"from,omitempty"`
+	UseExistingChangeAddress bool       `protobuf:"varint,4,opt,name=useExistingChangeAddress,proto3" json:"useExistingChangeAddress,omitempty"`
+	IsSendAll                bool       `protobuf:"varint,5,opt,name=isSendAll,proto3" json:"isSendAll,omitempty"`
+	FeePolicy                *FeePolicy `protobuf:"bytes,6,opt,name=feePolicy,proto3" json:"feePolicy,omitempty"`
+}
+
 func (x *CreateUnsignedTransactionsRequest) Reset() {
 	*x = CreateUnsignedTransactionsRequest{}
 	if protoimpl.UnsafeEnabled {
