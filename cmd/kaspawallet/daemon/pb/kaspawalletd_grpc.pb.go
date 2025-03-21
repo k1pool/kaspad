@@ -417,14 +417,14 @@ func _Kaspawalletd_SendMulti_Handler(srv interface{}, ctx context.Context, dec f
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(KaspawalletdServer).Send(ctx, in)
+		return srv.(KaspawalletdServer).SendMulti(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: "/kaspawalletd.kaspawalletd/SendMulti",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(KaspawalletdServer).Send(ctx, req.(*SendRequest))
+		return srv.(KaspawalletdServer).SendMulti(ctx, req.(*SendRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
