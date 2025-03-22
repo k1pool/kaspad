@@ -183,12 +183,13 @@ type KaspawalletdServer interface {
 	// Since SendRequest contains a password - this command should only be used on
 	// a trusted or secure connection
 	Send(context.Context, *SendRequest) (*SendResponse, error)
-	SendMulti(context.Context, *SendMultiRequest) (*SendResponse, error)
 	// Since SignRequest contains a password - this command should only be used on
 	// a trusted or secure connection
 	Sign(context.Context, *SignRequest) (*SignResponse, error)
 	GetVersion(context.Context, *GetVersionRequest) (*GetVersionResponse, error)
 	BumpFee(context.Context, *BumpFeeRequest) (*BumpFeeResponse, error)
+	CreateUnsignedMultiTransactions(context.Context, *CreateUnsignedMultiTransactionsRequest) (*CreateUnsignedTransactionsResponse, error)
+	SendMulti(context.Context, *SendMultiRequest) (*SendResponse, error)
 	mustEmbedUnimplementedKaspawalletdServer()
 }
 
