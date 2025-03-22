@@ -527,6 +527,10 @@ var Kaspawalletd_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Kaspawalletd_Send_Handler,
 		},
 		{
+			MethodName: "SendMulti",
+			Handler:    _Kaspawalletd_SendMulti_Handler,
+		},
+		{
 			MethodName: "Sign",
 			Handler:    _Kaspawalletd_Sign_Handler,
 		},
