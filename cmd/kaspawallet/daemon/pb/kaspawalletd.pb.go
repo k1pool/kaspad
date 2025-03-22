@@ -1135,8 +1135,8 @@ type SendMultiRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ToAddress                []string     `protobuf:"bytes,1,opt,name=toAddress,proto3" json:"toAddress,omitempty"`
-	Amount                   []uint64     `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	ToAddress                []string     `protobuf:"bytes,1,rep,opt,name=toAddress,proto3" json:"toAddress,omitempty"`
+	Amount                   []uint64     `protobuf:"varint,2,rep,opt,name=amount,proto3" json:"amount,omitempty"`
 	Password                 string     `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	From                     []string   `protobuf:"bytes,4,rep,name=from,proto3" json:"from,omitempty"`
 	UseExistingChangeAddress bool       `protobuf:"varint,5,opt,name=useExistingChangeAddress,proto3" json:"useExistingChangeAddress,omitempty"`
@@ -1176,14 +1176,14 @@ func (*SendRequest) Descriptor() ([]byte, []int) {
 	return file_kaspawalletd_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *SendRequest) GetToAddress() string {
+func (x *SendRequest) GetToAddress() []string {
 	if x != nil {
 		return x.ToAddress
 	}
 	return ""
 }
 
-func (x *SendRequest) GetAmount() uint64 {
+func (x *SendRequest) GetAmount() []uint64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -1968,6 +1968,7 @@ var file_kaspawalletd_proto_goTypes = []interface{}{
 	(*GetVersionResponse)(nil),                 // 25: kaspawalletd.GetVersionResponse
 	(*BumpFeeRequest)(nil),                     // 26: kaspawalletd.BumpFeeRequest
 	(*BumpFeeResponse)(nil),                    // 27: kaspawalletd.BumpFeeResponse
+	(*SendMultiRequest)(nil),                   // 28: kaspawalletd.SendMultiRequest
 }
 var file_kaspawalletd_proto_depIdxs = []int32{
 	2,  // 0: kaspawalletd.GetBalanceResponse.addressBalances:type_name -> kaspawalletd.AddressBalances
@@ -1987,6 +1988,7 @@ var file_kaspawalletd_proto_depIdxs = []int32{
 	10, // 14: kaspawalletd.kaspawalletd.Broadcast:input_type -> kaspawalletd.BroadcastRequest
 	10, // 15: kaspawalletd.kaspawalletd.BroadcastReplacement:input_type -> kaspawalletd.BroadcastRequest
 	20, // 16: kaspawalletd.kaspawalletd.Send:input_type -> kaspawalletd.SendRequest
+	28, // 16: kaspawalletd.kaspawalletd.SendMulti:input_type -> kaspawalletd.SendMultiRequest
 	22, // 17: kaspawalletd.kaspawalletd.Sign:input_type -> kaspawalletd.SignRequest
 	24, // 18: kaspawalletd.kaspawalletd.GetVersion:input_type -> kaspawalletd.GetVersionRequest
 	26, // 19: kaspawalletd.kaspawalletd.BumpFee:input_type -> kaspawalletd.BumpFeeRequest
@@ -2341,6 +2343,18 @@ func file_kaspawalletd_proto_init() {
 		}
 		file_kaspawalletd_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BumpFeeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_kaspawalletd_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SendMultiRequest); i {
 			case 0:
 				return &v.state
 			case 1:
