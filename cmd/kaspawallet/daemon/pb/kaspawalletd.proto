@@ -9,8 +9,6 @@ service kaspawalletd {
       returns (GetExternalSpendableUTXOsResponse) {}
   rpc CreateUnsignedTransactions(CreateUnsignedTransactionsRequest)
       returns (CreateUnsignedTransactionsResponse) {}
-  rpc CreateUnsignedMultiTransactions(CreateUnsignedMultiTransactionsRequest)
-      returns (CreateUnsignedTransactionsResponse) {}
   rpc ShowAddresses(ShowAddressesRequest) returns (ShowAddressesResponse) {}
   rpc NewAddress(NewAddressRequest) returns (NewAddressResponse) {}
   rpc Shutdown(ShutdownRequest) returns (ShutdownResponse) {}
@@ -20,12 +18,14 @@ service kaspawalletd {
   // Since SendRequest contains a password - this command should only be used on
   // a trusted or secure connection
   rpc Send(SendRequest) returns (SendResponse) {}
-  rpc SendMulti(SendMultiRequest) returns (SendResponse) {}
   // Since SignRequest contains a password - this command should only be used on
   // a trusted or secure connection
   rpc Sign(SignRequest) returns (SignResponse) {}
   rpc GetVersion(GetVersionRequest) returns (GetVersionResponse) {}
   rpc BumpFee(BumpFeeRequest) returns (BumpFeeResponse) {}
+  rpc CreateUnsignedMultiTransactions(CreateUnsignedMultiTransactionsRequest)
+      returns (CreateUnsignedTransactionsResponse) {}
+  rpc SendMulti(SendMultiRequest) returns (SendResponse) {}
 }
 
 message GetBalanceRequest {}

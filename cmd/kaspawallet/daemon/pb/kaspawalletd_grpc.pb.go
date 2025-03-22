@@ -302,6 +302,24 @@ func _Kaspawalletd_CreateUnsignedTransactions_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Kaspawalletd_CreateUnsignedMultiTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUnsignedMultiTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KaspawalletdServer).CreateUnsignedMultiTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/kaspawalletd.kaspawalletd/CreateUnsignedMultiTransactions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KaspawalletdServer).CreateUnsignedMultiTransactions(ctx, req.(*CreateUnsignedMultiTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Kaspawalletd_ShowAddresses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ShowAddressesRequest)
 	if err := dec(in); err != nil {
@@ -527,10 +545,6 @@ var Kaspawalletd_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Kaspawalletd_Send_Handler,
 		},
 		{
-			MethodName: "SendMulti",
-			Handler:    _Kaspawalletd_SendMulti_Handler,
-		},
-		{
 			MethodName: "Sign",
 			Handler:    _Kaspawalletd_Sign_Handler,
 		},
@@ -541,6 +555,14 @@ var Kaspawalletd_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BumpFee",
 			Handler:    _Kaspawalletd_BumpFee_Handler,
+		},
+		{
+			MethodName: "CreateUnsignedMultiTransactions",
+			Handler:    _Kaspawalletd_CreateUnsignedMultiTransactions_Handler,
+		},
+		{
+			MethodName: "SendMulti",
+			Handler:    _Kaspawalletd_SendMulti_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
