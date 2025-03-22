@@ -1176,14 +1176,14 @@ func (*SendRequest) Descriptor() ([]byte, []int) {
 	return file_kaspawalletd_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *SendRequest) GetToAddress() []string {
+func (x *SendRequest) GetToAddress() string {
 	if x != nil {
 		return x.ToAddress
 	}
 	return ""
 }
 
-func (x *SendRequest) GetAmount() []uint64 {
+func (x *SendRequest) GetAmount() uint64 {
 	if x != nil {
 		return x.Amount
 	}
