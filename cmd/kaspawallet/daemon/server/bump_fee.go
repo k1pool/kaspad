@@ -87,7 +87,7 @@ func (s *server) BumpFee(_ context.Context, request *pb.BumpFeeRequest) (*pb.Bum
 	for outpoint := range outpointsToInputs {
 		allowUsed[outpoint] = struct{}{}
 	}
-	selectedUTXOs, spendValue, changeSompi, err := s.selectUTXOsWithPreselected([]*walletUTXO{maxUTXO}, allowUsed, domainTx.Outputs[0].Value, false, newFeeRate, maxFee, fromAddresses)
+	selectedUTXOs, spendValue, changeSompi, err := s.selectUTXOsWithPreselected([]*walletUTXO{maxUTXO}, allowUsed, domainTx.Outputs[0].Value, false, newFeeRate, maxFee, burnFee, fromAddresses)
 	if err != nil {
 		return nil, err
 	}
