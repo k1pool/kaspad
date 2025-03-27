@@ -155,6 +155,8 @@ func (s *server) maybeSplitAndMergeTransaction(transaction *serialization.Partia
 
 	if transactionMass < mempool.MaximumStandardTransactionMass {
 		return []*serialization.PartiallySignedTransaction{transaction}, nil
+	} else {
+		return nil, errors.Errorf("Transaction mass more than %d, failed to send. Try to decrease number of recipients", mempool.MaximumStandardTransactionMass)
 	}
 
 	splitCount, inputCountPerSplit, err := s.splitAndInputPerSplitCounts(transaction, transactionMass, changeAddress, feeRate, maxFee)
