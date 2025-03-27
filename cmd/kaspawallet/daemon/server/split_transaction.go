@@ -1,7 +1,6 @@
 package server
 
 import (
-	"github.com/kaspanet/go-secp256k1"
 	"github.com/pkg/errors"
 
 	"github.com/k1pool/kaspad/cmd/kaspawallet/libkaspawallet"
@@ -22,9 +21,9 @@ import (
 // An additional `mergeTransaction` is generated - which merges the outputs of the above splits into a single output
 // paying to the original transaction's payee.
 func (s *server) maybeAutoCompoundTransaction(transaction *serialization.PartiallySignedTransaction, toAddress util.Address,
-	changeAddress util.Address, changeWalletAddress *walletAddress, feeRate float64, maxFee uint64) ([][]byte, error) {
+	changeAddress util.Address, changeWalletAddress *walletAddress, feeRate float64, maxFee uint64, isMultiTx bool) ([][]byte, error) {
 
-	splitTransactions, err := s.maybeSplitAndMergeTransaction(transaction, toAddress, changeAddress, changeWalletAddress, feeRate, maxFee)
+	splitTransactions, err := s.maybeSplitAndMergeTransaction(transaction, toAddress, changeAddress, changeWalletAddress, feeRate, maxFee, isMultiTx)
 	if err != nil {
 		return nil, err
 	}
@@ -141,7 +140,7 @@ func (s *server) checkTransactionFeeRate(psTx *serialization.PartiallySignedTran
 }
 
 func (s *server) maybeSplitAndMergeTransaction(transaction *serialization.PartiallySignedTransaction, toAddress util.Address,
-	changeAddress util.Address, changeWalletAddress *walletAddress, feeRate float64, maxFee uint64) ([]*serialization.PartiallySignedTransaction, error) {
+	changeAddress util.Address, changeWalletAddress *walletAddress, feeRate float64, maxFee uint64, isMultiTx bool) ([]*serialization.PartiallySignedTransaction, error) {
 
 	err := s.checkTransactionFeeRate(transaction, maxFee)
 	if err != nil {
@@ -155,7 +154,7 @@ func (s *server) maybeSplitAndMergeTransaction(transaction *serialization.Partia
 
 	if transactionMass < mempool.MaximumStandardTransactionMass {
 		return []*serialization.PartiallySignedTransaction{transaction}, nil
-	} else {
+	} else if isMultiTx == true {
 		return nil, errors.Errorf("Transaction mass more than %d, failed to send. Try to decrease number of recipients", mempool.MaximumStandardTransactionMass)
 	}
 

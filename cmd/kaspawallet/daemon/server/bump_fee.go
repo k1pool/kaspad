@@ -128,7 +128,7 @@ func (s *server) BumpFee(_ context.Context, request *pb.BumpFeeRequest) (*pb.Bum
 		return nil, err
 	}
 
-	unsignedTransactions, err := s.maybeAutoCompoundTransaction(unsignedTransaction, toAddress, changeAddress, changeWalletAddress, newFeeRate, maxFee)
+	unsignedTransactions, err := s.maybeAutoCompoundTransaction(unsignedTransaction, toAddress, changeAddress, changeWalletAddress, newFeeRate, maxFee, false)
 	if err != nil {
 		return nil, err
 	}

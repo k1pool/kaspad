@@ -23,7 +23,8 @@ import (
 const minChangeTarget = constants.SompiPerKaspa * 10
 
 // The current minimal fee rate according to mempool standards
-const minFeeRate = 0.0001 //1.0
+const minFeeRate = 1.0
+const burnFee = constants.SompiPerKaspa * 0
 
 func (s *server) CreateUnsignedTransactions(_ context.Context, request *pb.CreateUnsignedTransactionsRequest) (
 	*pb.CreateUnsignedTransactionsResponse, error,
@@ -129,7 +130,7 @@ func (s *server) createUnsignedTransactions(address string, amount uint64, isSen
 		return nil, err
 	}
 
-	selectedUTXOs, spendValue, changeSompi, err := s.selectUTXOs(amount, isSendAll, feeRate, maxFee, fromAddresses)
+	selectedUTXOs, spendValue, changeSompi, err := s.selectUTXOs(amount, isSendAll, feeRate, maxFee, burnFee, fromAddresses)
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +156,7 @@ func (s *server) createUnsignedTransactions(address string, amount uint64, isSen
 		return nil, err
 	}
 
-	unsignedTransactions, err := s.maybeAutoCompoundTransaction(unsignedTransaction, toAddress, changeAddress, changeWalletAddress, feeRate, maxFee)
+	unsignedTransactions, err := s.maybeAutoCompoundTransaction(unsignedTransaction, toAddress, changeAddress, changeWalletAddress, feeRate, maxFee, false)
 	if err != nil {
 		return nil, err
 	}
@@ -199,7 +200,7 @@ func (s *server) createUnsignedMultiTransactions(addresses []string, amounts []u
 		return nil, err
 	}
 
-	selectedUTXOs, _, changeSompi, err := s.selectUTXOs(totalAmount, isSendAll, feeRate, maxFee, fromAddresses)
+	selectedUTXOs, _, changeSompi, err := s.selectUTXOs(totalAmount, isSendAll, feeRate, maxFee, burnFee, fromAddresses)
 	if err != nil {
 		return nil, err
 	}
@@ -233,19 +234,19 @@ func (s *server) createUnsignedMultiTransactions(addresses []string, amounts []u
 		return nil, err
 	}
 
-	unsignedTransactions, err := s.maybeAutoCompoundTransaction(unsignedTransaction, toAddress, changeAddress, changeWalletAddress, feeRate, maxFee)
+	unsignedTransactions, err := s.maybeAutoCompoundTransaction(unsignedTransaction, toAddress, changeAddress, changeWalletAddress, feeRate, maxFee, true)
 	if err != nil {
 		return nil, err
 	}
 	return unsignedTransactions, nil
 }
 
-func (s *server) selectUTXOs(spendAmount uint64, isSendAll bool, feeRate float64, maxFee uint64, fromAddresses []*walletAddress) (
+func (s *server) selectUTXOs(spendAmount uint64, isSendAll bool, feeRate float64, maxFee uint64, burnFee uint64, fromAddresses []*walletAddress) (
 	selectedUTXOs []*libkaspawallet.UTXO, totalReceived uint64, changeSompi uint64, err error) {
-	return s.selectUTXOsWithPreselected(nil, map[externalapi.DomainOutpoint]struct{}{}, spendAmount, isSendAll, feeRate, maxFee, fromAddresses)
+	return s.selectUTXOsWithPreselected(nil, map[externalapi.DomainOutpoint]struct{}{}, spendAmount, isSendAll, feeRate, maxFee, burnFee, fromAddresses)
 }
 
-func (s *server) selectUTXOsWithPreselected(preSelectedUTXOs []*walletUTXO, allowUsed map[externalapi.DomainOutpoint]struct{}, spendAmount uint64, isSendAll bool, feeRate float64, maxFee uint64, fromAddresses []*walletAddress) (
+func (s *server) selectUTXOsWithPreselected(preSelectedUTXOs []*walletUTXO, allowUsed map[externalapi.DomainOutpoint]struct{}, spendAmount uint64, isSendAll bool, feeRate float64, maxFee uint64, burnFee uint64, fromAddresses []*walletAddress) (
 	selectedUTXOs []*libkaspawallet.UTXO, totalReceived uint64, changeSompi uint64, err error) {
 
 	preSelectedSet := make(map[externalapi.DomainOutpoint]struct{})
@@ -295,6 +296,8 @@ func (s *server) selectUTXOsWithPreselected(preSelectedUTXOs []*walletUTXO, allo
 		}
 
 		fee, err = s.estimateFee(selectedUTXOs, feeRate, maxFee, estimatedRecipientValue)
+		fee += burnFee
+
 		if err != nil {
 			return false, err
 		}
